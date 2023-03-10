@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+
+.button.primary {
+  background-color: red
+}
+
+.button.secondary {
+  background-color: blue;
+}
+
+.button {
+  background-color: orange;
+}

@@ -1,65 +1,50 @@
-import logo from './logo.svg';
-import Product from './Product';
+import { Alert } from './components/Alert';
+import clsx from 'clsx';
 import './App.css';
+import styled from 'styled-components';
 
-function Welcome(props) {
-  const { name } = props;
-
-  const tmpString = `Hello, ${name}`;
-  return <p>Hello, {name}</p>
-}
+import PrimaryButton from './buttons/PrimaryButton'
+import SecondaryButton from './buttons/SecondaryButton';
 
 function App() {
+  const some = 0;
 
-  const productList = [
-    {
-      id: 0,
-      header: 'header-1',
-      price: 15,
-      name: 'awesome'
-    },
-    {
-      id: 1,
-      header: 'header-2',
-      price: 1,
-      name: 'my name'
-    },
-    {
-      id: 5,
-      header: 'header-31',
-      price: 5,
-      name: 'cookie'
-    },
-    {
-      id: 5,
-      header: 'header-4',
-      price: 105,
-      name: 'react'
-    },
-    {
-      id: 123123,
-      header: 'header-5',
-      price: 105,
-      name: 'react'
-    },
-  ]
+  const className = clsx(
+    "first",
+    10,
+    undefined && "second",
+    true && "third",
+    false ? "fourth" : "fifth",
+    some && "six"
+  )
 
-  const favouriteBooks = [
-    { id: "id-1", name: "JS for beginners" },
-    { id: "id-2", name: "React basics" },
-    { id: "id-3", name: "React Router overview" },
-    { id: "id-4", name: "Redux in depth" },
-  ];
-
+  const Paragraph = styled.h4`
+    color: red
+  `
   return (
-    <div className="App">
-      {productList.map((product, index) => {
-        return (
-          <Product key={index} {...product} />
-        )
-      })}
-    </div>
+    <>
+      <Alert variant="info">
+        Please update your email!
+      </Alert>
+      <Alert variant="error" outlined={true}>
+        There was an error during transaction!
+      </Alert>
+      <Alert variant="success" elevated={true}>
+        Payment received, thank you for your purchase!
+      </Alert>
+      <Alert variant="warning" outlined={true} elevated={true}>
+        Please update your profile contact information
+      </Alert>
+      <Paragraph>
+        Test
+      </Paragraph>
+      {/* <Button variant="primary">Primary</Button>
+      <Button variant="secondary">Secondary</Button> */}
+      <PrimaryButton />
+      <SecondaryButton />
+    </>
   );
+
 }
 
 export default App;

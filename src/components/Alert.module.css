@@ -1,0 +1,41 @@
+.alert {
+    padding: 12px 16px;
+    border-radius: 4px;
+    background-color: gray;
+    color: white;
+}
+
+.some {
+    /* margin: 8px; */
+}
+
+.info {
+    composes: alert some;
+    background-color: blue;
+}
+
+.success {
+    composes: alert some;
+    background-color: green;
+}
+
+.error {
+    composes: alert;
+    composes: some;
+    background-color: red;
+}
+
+.warning {
+    composes: some;
+    composes: alert;
+    background-color: orange;
+}
+
+.alert.is-outlined {
+    outline: 1px solid black;
+}
+
+.alert.is-elevated {
+    box-shadow: rgb(0 0 0 / 20%) 0px 3px 3px -2px, rgb(0 0 0 / 14%) 0px 3px 4px 0px,
+    rgb(0 0 0 / 12%) 0px 1px 8px 0px;
+}
