@@ -5,6 +5,39 @@ import styled from 'styled-components';
 
 import PrimaryButton from './buttons/PrimaryButton'
 import SecondaryButton from './buttons/SecondaryButton';
+import { Component } from 'react';
+import Counter from './components/Counter';
+import Toggle from './components/Toggle';
+
+class MyComponent extends Component {
+  name = 'Bjorn'
+  age = 5
+
+  static defaultProps = {
+    step: 1
+  }
+
+  static propTypes = {
+
+  }
+
+  constructor() {
+    super()
+    this.age = 6
+  }
+
+  shouldReturnAlwaysTrue() {
+    return true;
+  }
+
+  render() {
+    return (
+      <div>
+        Class Component {this.age}
+      </div>
+    )
+  }
+}
 
 function App() {
   const some = 0;
@@ -21,27 +54,36 @@ function App() {
   const Paragraph = styled.h4`
     color: red
   `
+
+  // const [age, setAge] = useState(3);
+
+  // const currentState = { name: 'Tom', age: 15}
+  // const updateSomeState = { firstName: 'Bob', age: 30 }
+
+  // const finalState = {
+  //   ...currentState,
+  //   ...updateSomeState
+  // } 
+
+  // const finalState = {
+  //   name: 'Tom',
+  //   age: 30,
+  //   firstName: 'Bob'
+  // }
+
+  // const somefunction = () => console.log('some')
+
   return (
     <>
-      <Alert variant="info">
-        Please update your email!
-      </Alert>
-      <Alert variant="error" outlined={true}>
-        There was an error during transaction!
-      </Alert>
-      <Alert variant="success" elevated={true}>
-        Payment received, thank you for your purchase!
-      </Alert>
-      <Alert variant="warning" outlined={true} elevated={true}>
-        Please update your profile contact information
-      </Alert>
-      <Paragraph>
-        Test
-      </Paragraph>
-      {/* <Button variant="primary">Primary</Button>
-      <Button variant="secondary">Secondary</Button> */}
-      <PrimaryButton />
-      <SecondaryButton />
+      <MyComponent firstName='first' />
+      <Counter
+        step={1}
+        initialValue={5}
+
+      />
+      {/* <Toggle>
+        <div>Test Tooglera</div>
+      </Toggle> */}
     </>
   );
 
