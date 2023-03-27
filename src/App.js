@@ -1,34 +1,22 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useToggle } from "./hooks/useToggle";
 
 const App = () => {
-  const [firstValue, setFirstValue] = useState(1)
-  const [secondValue, setSecondValue] = useState(2)
-  const [sum, setSum] = useState(firstValue + secondValue)
 
-  useEffect(() => {
-    setSum(firstValue + secondValue)
-    // const newSum = firstValue + secondValue;
+  const { isOpen, open, close} = useToggle(true);
 
-    // axios ... (newSum)
-
-    // console.log({firstValue})
-
-    // return () => {
-    //   console.log('Unmount')
-    // }
-  }, [firstValue, secondValue])
-
-  const sumSetTo10 = () => {
-    setSum(10)
-  }
+  // const [isOpen, setIsOpen] = useState(false);
+  // const openModal = () => setIsOpen(true);
+  // const closeModal = () => setIsOpen(false);
 
   return (
     <div>
-      <p>Sum is: {sum}</p>
-      {/* <button type="button" onClick={() => setSum(firstValue + secondValue)}>Calculate Sum</button> */}
-      <button type="button" onClick={sumSetTo10}>Set Sum to 10</button>
-      <button type="button" onClick={() => setFirstValue(firstValue + 1)}>Add 1 to firstValue</button>
-      <button type="button" onClick={() => setSecondValue(prev => prev + 1)}>Add 1 to secondValue</button>
+      {isOpen ? 
+      <p>
+        This is my Modal!
+        <button onClick={close}>Close modal</button>
+      </p> : <button onClick={open}>Open modal</button>
+      }
     </div>
   )
 }
