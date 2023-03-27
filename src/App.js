@@ -1,72 +1,83 @@
-import { Component } from 'react';
-import axios from "axios";
-import ContentLoader from 'react-content-loader';
+import { useState, useEffect } from "react";
 
-import './App.css';
-import ArticleList from './components/ArticleList';
-import Container from './components/Container';
-import ErrorBoundary from './components/ErrorBoundary';
-import LoginForm from './components/LoginForm';
-import SignUpForm from './components/SignUpForm';
+const App = () => {
+  // const handleChange = () => {
+  //   setValue(prevValue => prevValue + 3)
+  // }
 
-import { consoleLogAbba, fetchArticlesWithQuery } from './utils/getArticles';
-// import * as api from './utils/getArticles'
+  // const [value, setValue] = useState(10);
+  // const [second, setSecond] = useState(5)
 
-axios.defaults.baseURL = "https://hn.algolia.com/api/v1";
-// axios.defaults.baseURL = "https://hn.algolasdasdasdasdia.com/api/v1";
-class App extends Component {
-  state = {
-    articles: [],
-    // query: '/search?query=react',
-    query: 'react',
-    isLoading: false,
-    error: ''
-    // isError: boolean
-  }
+  // const [userValue, setUserValue] = useState({
+  //   username: 'abc',
+  //   todos: [{ text: 'H'}],
+  //   someBoolean: false,
+  // });
 
-  async componentDidMount() {
-    // if (this.state.query === '') {
-    //   const response = await axios.get('/search?query=mostAwesomeProducts')
-    //   this.setState(...)
-    // }
+  // const [username, setUsername] = useState({
+  //   firstName: 'R',
+  //   secondName: 'A'
+  // });
+  // const [todos, setTodos] = useState([{ text: 'H'}])
+  // const [isActive, setIsActive] = useState(true)
 
-    // this.setState({
-    //   isLoading: true
-    // })
+  // const handleChange = (value) => {
+  //   if (isActive) {
+  //     setUsername({
+  //       ...username,
+  //       firstName: value
+  //     })
+  //   }
+  // }
 
-    await this.getInitialData()
-    // await setTimeout(async () => {
-    // }, 10000)
-  }
+  
+  // if (isActive) {
+  //   // You cannot in "if"
+  //   const [donut, setDonut] = useState('awesome');
+  // }
 
-  getInitialData = async () => {
-    consoleLogAbba()
+  const [value, setValue] = useState(0);
+  const [other, setOther] = useState(0);
+  const [again, setAgain] = useState(0);
 
-    try {
-      const articles = await fetchArticlesWithQuery(this.state.query)
-      this.setState({ articles })
-    } catch (error) {
-      console.log('error')
-      this.setState({ error })
-    } finally {
-      console.log('finally')
-      this.setState({ isLoading: false })
-    }
-  }
+  useEffect(() => {
+    console.log(`You clicked ${value} times. And again ${again} `)
+    // fetch(...)
+    // setOther(axios.get(...))
+  }, [value, again])
 
-  render() {
-    const { articles, isLoading, error } = this.state;
+  useEffect(() => {
+    //Do something only once
+  }, [])
 
-    return (
-      <>
-        {/* {isLoading ? <ContentLoader /> : <ArticleList articles={articles} />} */}
-        {error && <p>Something went wrong: {error.message}</p>}
-        {isLoading && <ContentLoader />}
-        {articles.length > 0 && <ArticleList articles={articles} />}
-      </>
-    );
-  }
+  useEffect(() => {
+    //Every time
+  })
 
+  return (
+    <div>
+      <p>You clicked {value} times. And Value1 {other} - Value2 {again}</p>
+      <button type="button" onClick={() => setValue(value + 1)}>Click value</button>
+      <button type="button" onClick={() => setOther(other + 1)}>Click other</button>
+    </div>
+    // <div>
+    //   {username.firstName} {username.secondName} {todos.toString()} {isActive}
+    //   <button onClick={() => handleChange('some new first name')}>some</button> 
+    //   <ArticleList articles={username}></ArticleList>
+    // </div>
+    // <div>
+    //   {value} , {second}
+    //   <button type="button" onClick={() => setSecond(second + 1)}>
+    //       Increase
+    //   </button>
+    //   <button type="button" onClick={() => setValue(prev => prev + 2)}>
+    //       Increase other
+    //   </button>
+    //   <button type="button" onClick={handleChange}>
+    //       Increase other again
+    //   </button>
+    // </div>
+  )
 }
 
 export default App;
