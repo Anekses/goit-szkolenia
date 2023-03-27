@@ -1,4 +1,7 @@
+// import { useState } from "react"
+
 const ArticleList = ({ articles }) => {
+    // const [articlesNew, setArticlesNew] = useState(articles)
     return (
         <ul>
             {articles.map(({ objectID, url, title }) => (
