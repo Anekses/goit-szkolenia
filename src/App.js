@@ -1,21 +1,19 @@
 import { useState } from "react";
-import { useToggle } from "./hooks/useToggle";
+import { Username } from "./components/Username";
+import { useUser } from "./providers/userContext";
 
 const App = () => {
-
-  const { isOpen, open, close} = useToggle(true);
-
-  // const [isOpen, setIsOpen] = useState(false);
-  // const openModal = () => setIsOpen(true);
-  // const closeModal = () => setIsOpen(false);
+  const { isLoggedIn, logIn, logOut, someArgument } = useUser()
+  const [some, setSome] = useState(1)
 
   return (
     <div>
-      {isOpen ? 
-      <p>
-        This is my Modal!
-        <button onClick={close}>Close modal</button>
-      </p> : <button onClick={open}>Open modal</button>
+      {isLoggedIn && <Username some={some} /> }
+      <h2>{someArgument}</h2>
+      {isLoggedIn ? (
+        <button type="button" onClick={logOut}>OUT</button>
+      ) : 
+        <button type="button" onClick={logIn}>IN</button>
       }
     </div>
   )
