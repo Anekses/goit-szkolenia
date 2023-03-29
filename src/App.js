@@ -1,20 +1,36 @@
-import { useState } from "react";
-import { Username } from "./components/Username";
-import { useUser } from "./providers/userContext";
+import { useMemo } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Player } from "./components/Player";
 
 const App = () => {
-  const { isLoggedIn, logIn, logOut, someArgument } = useUser()
-  const [some, setSome] = useState(1)
+
+  // const memoValue = useMemo(
+  //   () => checkIfFIrstAndSecondNameIsTheSame(firstName, secondName), 
+  // [firstName, secondName])
+
+  const [planets, setPlanets] = useState(["Earth", "Mars", "Jupiter", "Venus", "Saturn"])
+  const [query, setQuery] = useState("");
+  const [clicks, setClicks] = useState(11);
+  // const [filteredPlanets, setFilteredPlanets] = useState([])
+
+  // const filteredPlanets = planets.filter(planet => planet.includes(query))
+
+  const filteredPlanets = useMemo(
+    () => planets.filter(planet => planet.includes(query)),
+    [planets, query]
+  )
 
   return (
     <div>
-      {isLoggedIn && <Username some={some} /> }
-      <h2>{someArgument}</h2>
-      {isLoggedIn ? (
-        <button type="button" onClick={logOut}>OUT</button>
-      ) : 
-        <button type="button" onClick={logIn}>IN</button>
-      }
+      <div>
+        Numer of clicks: {clicks}
+      </div>
+      <button type="button" onClick={() => setClicks(prev => prev +1)}>
+        Click me!
+      </button>
+      {filteredPlanets.map(planet => (
+        <div key={planet}>{planet}</div>
+      ))}
     </div>
   )
 }
