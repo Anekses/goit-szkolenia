@@ -1,36 +1,35 @@
-import { useMemo } from "react";
-import { useEffect, useRef, useState } from "react";
-import { Player } from "./components/Player";
+import { Link, NavLink, Route, Routes } from "react-router-dom";
+import { UserPage } from "./pages/UserPage";
+import { Home } from "./pages/HomePage";
+import { NotFoundPage } from "./pages/NotFoundPage";
+import { AboutPage } from "./pages/AboutPage";
+import { ProductsPage } from "./pages/ProductsPage"
+import { MissionPage } from "./pages/MissionPage";
+import { TeamPage } from "./pages/TeamPage";
+import { ReviewsPage } from "./pages/ReviewsPage";
+import { ProductDetailsPage } from "./pages/ProductDetailsPage";
+import { SharedLayout } from "./components/SharedLayout";
 
 const App = () => {
-
-  // const memoValue = useMemo(
-  //   () => checkIfFIrstAndSecondNameIsTheSame(firstName, secondName), 
-  // [firstName, secondName])
-
-  const [planets, setPlanets] = useState(["Earth", "Mars", "Jupiter", "Venus", "Saturn"])
-  const [query, setQuery] = useState("");
-  const [clicks, setClicks] = useState(11);
-  // const [filteredPlanets, setFilteredPlanets] = useState([])
-
-  // const filteredPlanets = planets.filter(planet => planet.includes(query))
-
-  const filteredPlanets = useMemo(
-    () => planets.filter(planet => planet.includes(query)),
-    [planets, query]
-  )
-
   return (
     <div>
-      <div>
-        Numer of clicks: {clicks}
-      </div>
-      <button type="button" onClick={() => setClicks(prev => prev +1)}>
-        Click me!
-      </button>
-      {filteredPlanets.map(planet => (
-        <div key={planet}>{planet}</div>
-      ))}
+      <Routes>
+        <Route path="/" element={<SharedLayout />}>
+          <Route index element={<Home />} />
+          <Route path="/user" element={<UserPage />} />
+
+          <Route path="/about" element={<AboutPage />}>
+            <Route index element={<MissionPage />} />
+            <Route path="mission" element={<MissionPage />} />
+            <Route path="team" element={<TeamPage />} />
+            <Route path="reviews" element={<ReviewsPage />} />
+          </Route>
+          
+          <Route path="/products" element={<ProductsPage />} />
+          <Route path="/products/:productId/:carpenter" element={<ProductDetailsPage />} />
+        </Route>
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
     </div>
   )
 }
