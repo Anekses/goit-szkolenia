@@ -1,8 +1,11 @@
-import { useParams } from "react-router-dom"
+import { Link, useLocation, useParams } from "react-router-dom"
 
 export const ProductDetailsPage = () => {
     // const useParamsOutput = useParams()
     const { productId, carpenter } = useParams()
+    const location = useLocation();
+
+    const backLinkHref = location.state?.from ?? "/products";
 
     // fetch(`${urlToBackend}/${productID}`)
 
@@ -15,6 +18,7 @@ export const ProductDetailsPage = () => {
             <p>
                 My carpenter is: {carpenter}
             </p>
+            <Link to={backLinkHref}>Back to products</Link>
         </div>
     )
 }
