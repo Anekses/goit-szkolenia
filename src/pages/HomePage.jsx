@@ -10,6 +10,10 @@ export const Home = () => {
   const getUni = async () => {
     // const countryValue = value ?? 'Poland'
 
+    const a = ''; // 0, false, {}
+    const b = a ?? 'something';
+    const c = a || 'something';
+
     const firstCallUrl = `${baseUrl}country=${country}`
     const uni = await fetch(firstCallUrl);
     const data = await uni.json()
@@ -24,6 +28,10 @@ export const Home = () => {
       //   setIsLoading(false);
     // })
     // })
+  }
+
+  const sum = (a, b) => {
+    return a + b
   }
 
   const handleSubmit = (event) => {
