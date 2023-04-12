@@ -10,21 +10,14 @@ import { ReviewsPage } from "./pages/ReviewsPage";
 import { ProductDetailsPage } from "./pages/ProductDetailsPage";
 import { SharedLayout } from "./components/SharedLayout";
 import { LoginPage } from "./pages/LoginPage";
-import { Suspense, lazy, useEffect } from "react";
-
-const MyComponent = lazy(() => import('./pages/MissionPage'))
+import { Suspense, useEffect } from "react";
 
 const App = () => {
-  const location = useLocation();
 
-  // console.log({location})
-
-  useEffect(() => {
-    // Analytics.send(location);
-    // console.log({location})
-  }, [location])
-
-  console.log({MyComponent})
+  // Buzzwords
+  // Easy: Narzędzia Świnoujście u Jacka, Dąbrowska 14
+  // Hard: Narzędzia sprzedaż
+  // SSR
 
   return (
     <div>
@@ -35,6 +28,8 @@ const App = () => {
           <Route index element={<Home />} />
           <Route path="/user" element={<UserPage />} />
 
+
+
           <Route path="/about" element={<AboutPage />}>
             <Route index element={<MissionPage />} />
             <Route path="mission" element={<MissionPage />} />
@@ -42,8 +37,8 @@ const App = () => {
             <Route path="reviews" element={<ReviewsPage />} />
           </Route>
 
-          {/* <AboutRouting /> */}
-          
+
+
           <Route path="/products" element={<ProductsPage />} />
           <Route path="/products/:productId" element={<ProductDetailsPage />} />
           <Route path="/products/:productId/:carpenter" element={<ProductDetailsPage />} />
@@ -56,13 +51,3 @@ const App = () => {
 }
 
 export default App;
-
-// AboutRouting
-// return (
-//   <Route path="/about" element={<AboutPage />}>
-//     <Route index element={<MissionPage />} />
-//     <Route path="mission" element={<MissionPage />} />
-//     <Route path="team" element={<TeamPage />} />
-//     <Route path="reviews" element={<ReviewsPage />} />
-//   </Route>
-// )
