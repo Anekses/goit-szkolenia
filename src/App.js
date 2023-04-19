@@ -1,14 +1,17 @@
-import { useSelector } from "react-redux";
-import { StatusFilter } from "./components/StatusFilter/StatusFilter";
 import { TaskList } from "./components/TaskList/TaskList";
+import { Layout } from "./components/Layout/Layout";
+import { AppBar } from "./components/AppBar/AppBar";
+import { TaskForm } from "./components/TaskForm/TaskForm";
+
 
 const App = () => {
 
   return (
-    <div>
-      <StatusFilter />
+    <Layout>
+      <AppBar />
+      <TaskForm />
       <TaskList />
-    </div>
+    </Layout>
   )
 }
 
