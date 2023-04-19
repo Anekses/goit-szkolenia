@@ -5,7 +5,8 @@ export const Button = ({
   selected = false,
   type = "button",
   children,
-  ...otherProps
+  onClick,
+  ...addtionalProps
 }) => {
   return (
     <button
@@ -13,7 +14,7 @@ export const Button = ({
         [css.isSelected]: selected
       })}
       type={type}
-      {...otherProps}
+      {...addtionalProps}
     >
       {children}
     </button>
