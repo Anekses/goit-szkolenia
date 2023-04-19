@@ -5,7 +5,6 @@ export const Button = ({
   selected = false,
   type = "button",
   children,
-  onClick,
   ...addtionalProps
 }) => {
   return (

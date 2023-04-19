@@ -1,4 +1,5 @@
-import { combineReducers } from "redux";
+import { createReducer } from "@reduxjs/toolkit";
+import { addTask, setStatusFilter, toggleCompleted } from "./actions";
 import { statusFilters } from "./constants";
 
 const tasksInitialState = [
@@ -9,13 +10,13 @@ const tasksInitialState = [
   { id: 4, text: "Build amazing apps", completed: false },
 ];
 
-const tasksReducer = (state = tasksInitialState, action) => {
+export const tasksReducerOld = (state = tasksInitialState, action) => {
   switch (action.type) {
     case "tasks/addTask":
       return [...state, action.payload];
     case "tasks/deleteTask":
       return state.filter(task => task.id !== action.payload);
-    case "tasks/toggleCompleted":
+    case toggleCompleted.type:
       return state.map(task => {
         if (task.id !== action.payload) {
           return task;
@@ -27,13 +28,41 @@ const tasksReducer = (state = tasksInitialState, action) => {
   }
 };
 
+export const tasksReducer = createReducer(tasksInitialState, {
+  [addTask]: (state, action) => {
+    // return [...state, action.payload];
+    state.push(action.payload) 
+  },
+  // [deleteTask]: (state, action) => {
+  //   const index = state.findIndex(task => task.id === action.payload)
+  //   state.splice(index, 1)
+  //   //someText
+  //   // state.push(action.payload) 
+
+  //   return state.filter(task => task.id !== action.payload);
+  // }
+  [toggleCompleted]: (state, action) => {
+    for (const task of state) {
+      if (task.id === action.payload) {
+        task.completed = !task.completed
+      }
+    }
+    // return state.map(task => {
+    //   if (task.id !== action.payload) {
+    //     return task;
+    //   }
+    //   return { ...task, completed: !task.completed };
+    // });
+  }
+})
+
 const filtersInitialState = {
-  status: statusFilters.all,
+  status: statusFilters.active,
 };
 
-const filtersReducer = (state = filtersInitialState, action) => {
+export const filtersReducer = (state = filtersInitialState, action) => {
   switch (action.type) {
-    case "filters/setStatusFilter":
+    case setStatusFilter.type:
       return {
         ...state,
         status: action.payload,
@@ -43,7 +72,7 @@ const filtersReducer = (state = filtersInitialState, action) => {
   }
 };
 
-export const rootReducer = combineReducers({
-  tasks: tasksReducer,
-  filters: filtersReducer,
-});
+// export const rootReducer = combineReducers({
+//   tasks: tasksReducer,
+//   filters: filtersReducer,
+// });
