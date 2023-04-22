@@ -6,19 +6,13 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
-import { FilterProvider } from './contexts/filterContext';
-import { TaskProvider } from './contexts/taskContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
-        <FilterProvider>
-          <TaskProvider>
-            <App />
-          </TaskProvider>
-        </FilterProvider>
+          <App />
       </Provider>
     </BrowserRouter>
   </React.StrictMode>
