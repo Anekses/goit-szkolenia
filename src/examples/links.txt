@@ -1,0 +1,2 @@
+https://github.com/streamich/react-use - Dużo fajnych hooków do spróbowania - podaję kilka fajniejszych: useCookie, useLocalStorage, useTitle (przykład przekopiowałem, macie w hooks), useToggle
+https://kentcdodds.com/blog/application-state-management-with-react - Artykuł o zarządzaniu stanem w React - sporo przykładów, sandboxów
